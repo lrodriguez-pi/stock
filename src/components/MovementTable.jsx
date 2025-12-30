@@ -30,5 +30,13 @@ export default function MovementTable({ products, movements }) {
     { key: "note", header: "Nota" }
   ];
 
-  return <Table columns={columns} rows={rows} emptyText="No hay movimientos." />;
+  return (
+    <Table
+      columns={columns}
+      rows={rows}
+      emptyText="No hay movimientos."
+      maxHeight="360px"
+      scrollThreshold={5}
+    />
+  );
 }

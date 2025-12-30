@@ -1,8 +1,11 @@
 import React from "react";
 
-export default function Table({ columns, rows, emptyText = "Sin datos" }) {
+export default function Table({ columns, rows, emptyText = "Sin datos", maxHeight, scrollThreshold }) {
+  const shouldScroll = typeof scrollThreshold === "number" ? rows.length > scrollThreshold : Boolean(maxHeight);
+  const wrapStyle = shouldScroll && maxHeight ? { maxHeight, overflowY: "auto" } : undefined;
+
   return (
-    <div className="tableWrap">
+    <div className="tableWrap" style={wrapStyle}>
       <table className="table">
         <thead>
           <tr>

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useStockContext } from "../state/StockContext.jsx";
 import { ActionType } from "../state/actions.js";
 import { validateMovement } from "../domain/validations.js";
+import { computeStock } from "../domain/stock.js";
+import { MovementType } from "../domain/types.js";
 
 const uid = () => (crypto?.randomUUID?.() ? crypto.randomUUID() : String(Date.now() + Math.random()));
 
@@ -21,6 +23,16 @@ export function useMovements() {
     };
 
     const errors = validateMovement(movement, state.products);
+
+    // Evitar ventas con stock insuficiente
+    if (movement.type === MovementType.OUT) {
+      const stockById = computeStock(state.products, state.movements);
+      const available = stockById[movement.productId] ?? 0;
+      if (movement.qty > available) {
+        errors.push(`No puedes vender ${movement.qty} u. porque solo hay ${available} en stock.`);
+      }
+    }
+
     setErrorList(errors);
     if (errors.length) return false;
 
