@@ -107,15 +107,16 @@ export default function Dashboard({ onGoToProducts, onGoToMovements }) {
             return (
               <div className="infoCard" key={period.key}>
                 <h4 className="infoTitle">{period.label}</h4>
+                 <div className="infoItem">
+                  Ganancia neta: <strong className="metricValue metricNet">{money(netProfit)}</strong>
+                </div>
                 <div className="infoItem">
                   Ganancia bruta: <strong className="metricValue metricGross">{money(period.data.sales)}</strong>
                 </div>
                 <div className="infoItem">
                   Costos: <strong className="metricValue metricCosts">{money(period.data.costs)}</strong>
                 </div>
-                <div className="infoItem">
-                  Ganancia neta: <strong className="metricValue metricNet">{money(netProfit)}</strong>
-                </div>
+               
               </div>
             );
           })}
