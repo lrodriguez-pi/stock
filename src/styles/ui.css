@@ -447,3 +447,13 @@
 .loginTitle { margin: 0; font-size: 20px; font-weight: 800; color: #111827; }
 .loginSubtitle { margin: 0; color: #6b7280; font-size: 13px; }
 .loginButton { width: 100%; }
+
+/* Conteo */
+.countPage { display: flex; flex-direction: column; gap: 16px; }
+.countFilters { margin-bottom: 12px; }
+.countInput { max-width: 120px; }
+.countDiff { font-weight: 700; }
+.diffPositive { color: #15803d; }
+.diffNegative { color: #b91c1c; }
+.diffZero { color: #6b7280; }
+.rowAdjust { background: #fff7ed; }

@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
 import MovementsPage from "./pages/MovementsPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
+import InventoryCountPage from "./pages/InventoryCountPage.jsx";
+import { can, PermissionAction } from "./domain/permissions.js";
 
 export default function App() {
   return (
@@ -16,17 +18,23 @@ export default function App() {
 }
 
 function AppContent() {
-  const { auth } = useStockContext();
+  const { auth, role } = useStockContext();
   const [tab, setTab] = useState("dashboard");
   const [movementTypePreset, setMovementTypePreset] = useState(null);
 
   const tabs = useMemo(
-    () => [
-      { key: "dashboard", label: "Dashboard" },
-      { key: "products", label: "Productos" },
-      { key: "movements", label: "Movimientos" }
-    ],
-    []
+    () => {
+      const items = [
+        { key: "dashboard", label: "Dashboard" },
+        { key: "products", label: "Productos" },
+        { key: "movements", label: "Movimientos" }
+      ];
+      if (can(role, PermissionAction.MOVEMENT_CREATE_ADJUST)) {
+        items.push({ key: "count", label: "Conteo" });
+      }
+      return items;
+    },
+    [role]
   );
 
   if (!auth) return <LoginPage />;
@@ -56,6 +64,7 @@ function AppContent() {
       )}
       {tab === "products" && <ProductsPage />}
       {tab === "movements" && <MovementsPage defaultType={movementTypePreset} />}
+      {tab === "count" && <InventoryCountPage />}
     </Layout>
   );
 }
