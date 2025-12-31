@@ -1,8 +1,9 @@
 import React from "react";
 import { useStockContext } from "../state/StockContext.jsx";
 import { useStock } from "../hooks/useStock.js";
+import { MovementType } from "../domain/types.js";
 
-export default function Dashboard() {
+export default function Dashboard({ onGoToProducts, onGoToMovements }) {
   const { state } = useStockContext();
   const { stockById, metrics } = useStock();
 
@@ -89,9 +90,23 @@ export default function Dashboard() {
       <section className="quickActionsCard">
         <h3 className="infoTitle">Acciones Rápidas</h3>
         <div className="quickButtons">
-          <button className="quickButton green" type="button">+ Agregar producto</button>
-          <button className="quickButton red" type="button">+ Registrar compra</button>
-          <button className="quickButton blue" type="button">+ Registrar venta</button>
+          <button className="quickButton green" type="button" onClick={onGoToProducts}>
+            + Agregar producto
+          </button>
+          <button
+            className="quickButton red"
+            type="button"
+            onClick={() => onGoToMovements?.(MovementType.IN)}
+          >
+            + Registrar compra
+          </button>
+          <button
+            className="quickButton blue"
+            type="button"
+            onClick={() => onGoToMovements?.(MovementType.OUT)}
+          >
+            + Registrar venta
+          </button>
         </div>
       </section>
     </div>

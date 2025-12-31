@@ -6,7 +6,7 @@ import { useStockContext } from "../state/StockContext.jsx";
 import { useMovements } from "../hooks/useMovements.js";
 import { useStock } from "../hooks/useStock.js";
 
-export default function MovementsPage() {
+export default function MovementsPage({ defaultType }) {
   const { state } = useStockContext();
   const { addMovement, errorList, movements } = useMovements();
   const { stockById } = useStock();
@@ -19,6 +19,7 @@ export default function MovementsPage() {
           stockById={stockById}
           onSubmit={addMovement}
           errors={errorList}
+          defaultType={defaultType}
         />
       </Card>
 

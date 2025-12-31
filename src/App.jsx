@@ -8,6 +8,7 @@ import MovementsPage from "./pages/MovementsPage.jsx";
 
 export default function App() {
   const [tab, setTab] = useState("dashboard");
+  const [movementTypePreset, setMovementTypePreset] = useState(null);
 
   const tabs = useMemo(
     () => [
@@ -21,11 +22,29 @@ export default function App() {
   return (
     <StockProvider>
       <Layout>
-        <Tabs tabs={tabs} value={tab} onChange={setTab} />
+        <Tabs
+          tabs={tabs}
+          value={tab}
+          onChange={(nextTab) => {
+            setTab(nextTab);
+            setMovementTypePreset(null);
+          }}
+        />
 
-        {tab === "dashboard" && <Dashboard />}
+        {tab === "dashboard" && (
+          <Dashboard
+            onGoToProducts={() => {
+              setTab("products");
+              setMovementTypePreset(null);
+            }}
+            onGoToMovements={(type) => {
+              setMovementTypePreset(type ?? null);
+              setTab("movements");
+            }}
+          />
+        )}
         {tab === "products" && <ProductsPage />}
-        {tab === "movements" && <MovementsPage />}
+        {tab === "movements" && <MovementsPage defaultType={movementTypePreset} />}
       </Layout>
     </StockProvider>
   );

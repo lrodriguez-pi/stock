@@ -2,11 +2,11 @@ import React, { useMemo, useState } from "react";
 import Field from "./Field.jsx";
 import { MovementType } from "../domain/types.js";
 
-export default function MovementForm({ products, stockById, onSubmit, errors }) {
+export default function MovementForm({ products, stockById, onSubmit, errors, defaultType }) {
   const activeProducts = useMemo(() => products.filter((p) => p.active !== false), [products]);
 
   const [productId, setProductId] = useState(activeProducts[0]?.id || "");
-  const [type, setType] = useState(MovementType.OUT);
+  const [type, setType] = useState(defaultType ?? MovementType.OUT);
   const [qty, setQty] = useState(1);
   const [note, setNote] = useState("");
 
