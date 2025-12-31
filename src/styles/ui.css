@@ -469,3 +469,25 @@
 .backupPage { display: flex; flex-direction: column; gap: 16px; }
 .backupActions { flex-wrap: wrap; }
 .backupMode { margin: 10px 0; }
+
+/* Reposicion */
+.restockPage { display: flex; flex-direction: column; gap: 16px; }
+.restockInput { max-width: 120px; }
+.noPrint { display: block; }
+.printArea { display: none; }
+.printTitle { margin: 0 0 4px; font-size: 20px; font-weight: 800; color: #111827; }
+.printDate { margin: 0 0 12px; }
+
+@media print {
+  body[data-printing="restock"] * { visibility: hidden; }
+  body[data-printing="restock"] .printArea,
+  body[data-printing="restock"] .printArea * { visibility: visible; }
+  body[data-printing="restock"] .printArea {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  body[data-printing="restock"] .noPrint { display: none !important; }
+}
