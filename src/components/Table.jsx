@@ -25,7 +25,9 @@ export default function Table({ columns, rows, emptyText = "Sin datos", maxHeigh
             rows.map((r, idx) => (
               <tr key={r.id || idx} className={r._rowClass || ""}>
                 {columns.map((c) => (
-                  <td key={c.key}>{c.render ? c.render(r) : r[c.key]}</td>
+                  <td key={c.key} data-label={c.header}>
+                    {c.render ? c.render(r) : r[c.key]}
+                  </td>
                 ))}
               </tr>
             ))

@@ -66,6 +66,7 @@
 }
 .tab:hover { color: #1f2937; }
 .tabActive { background: #c7212b; color: #fff; box-shadow: 0 10px 26px rgba(199, 33, 43, 0.25); }
+.mobileNav { display: none; }
 
 .card {
   background: #fff;
@@ -526,6 +527,99 @@
 .printArea { display: none; }
 .printTitle { margin: 0 0 4px; font-size: 20px; font-weight: 800; color: #111827; }
 .printDate { margin: 0 0 12px; }
+
+@media (max-width: 768px) {
+  .container { padding: 14px 14px 110px; }
+  .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .headerActions { width: 100%; flex-direction: column; align-items: stretch; gap: 10px; }
+  .statusPill { width: 100%; justify-content: center; }
+  .logoutButton { width: 100%; }
+  .main { gap: 14px; }
+  .tabs { display: none; }
+  .mobileNav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 8px;
+    padding: 10px 14px calc(14px + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.96);
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 -10px 26px rgba(17, 24, 39, 0.12);
+    z-index: 30;
+  }
+  .mobileNavButton {
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 12px 10px;
+    font-weight: 800;
+    color: #374151;
+    cursor: pointer;
+  }
+  .mobileNavButtonActive {
+    background: #c7212b;
+    color: #fff;
+    border-color: #a31623;
+    box-shadow: 0 10px 24px rgba(199, 33, 43, 0.25);
+  }
+  .mobileNavLabel { display: block; font-size: 13px; }
+  .card, .productCard, .infoCard, .quickActionsCard, .alertCard { border-radius: 14px; padding: 14px; }
+  .cardHeader, .productCardHeader { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .productFilters { width: 100%; flex-direction: column; align-items: stretch; }
+  .productCardTitle { width: 100%; }
+  .productFormActions, .actions { width: 100%; display: grid; grid-template-columns: 1fr; }
+  .quickButtons { grid-template-columns: 1fr; }
+  .input,
+  .btn,
+  .btnPrimary,
+  .btnDanger,
+  .btnGhost,
+  .btnSuccess,
+  .btnCTA,
+  .btnTablePrimary,
+  .btnTableGhost,
+  .quickButton { width: 100%; }
+  .tableWrap { overflow: visible; overflow-y: visible !important; max-height: none !important; }
+  .table { display: block; width: 100%; border-collapse: separate; }
+  .table thead { display: none; }
+  .table tbody { display: grid; gap: 12px; }
+  .table tr {
+    display: grid;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+  }
+  .table td {
+    display: grid;
+    grid-template-columns: minmax(110px, 42%) 1fr;
+    gap: 8px;
+    padding: 4px 0;
+    border: none;
+  }
+  .table td::before {
+    content: attr(data-label);
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 700;
+  }
+  .tableEmpty { text-align: center; }
+  .alertBody { flex-direction: column; }
+  .criticalActions { width: 100%; }
+  .criticalRow { align-items: flex-start; }
+  .grid2Small { grid-template-columns: 1fr; }
+  .restockInput, .countInput { max-width: 100%; }
+  .loginPage { padding-bottom: 120px; }
+  .loginShell { padding-top: 70px; }
+  .loginLogo { width: 220px; height: 220px; }
+  .loginCard { padding: 82px 18px 22px; }
+  .footer { margin-bottom: 80px; }
+}
 
 @media print {
   body[data-printing="restock"] * { visibility: hidden; }
